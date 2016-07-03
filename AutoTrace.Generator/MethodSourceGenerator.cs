@@ -72,14 +72,11 @@ namespace AutoTrace.Generator
 
             foreach (IParameterSymbol parameter in method.Parameters)
             {
-                sb.Append(parameter.Type.Name);
-                sb.Append(" ");
-                sb.Append(parameter.Name);
-                sb.Append(", ");
+                AddParameterName(sb, parameter);
+                AddParameterValue(sb, parameter);
             }
 
-            if (sb.Length > 1)
-                sb.Remove(sb.Length - 2, 2); // delete last , 
+            DeleteTrailingCommaAndWhitespace(sb);
 
             return sb.ToString();
         }
@@ -90,12 +87,10 @@ namespace AutoTrace.Generator
 
             foreach (IParameterSymbol parameter in symbol.Parameters)
             {
-                sb.Append(parameter.Name);
-                sb.Append(", ");
+                AddParameterValue(sb, parameter);
             }
 
-            if (sb.Length > 1)
-                sb.Remove(sb.Length - 2, 2); // delete last , 
+            DeleteTrailingCommaAndWhitespace(sb);
 
             return sb.ToString();
         }
@@ -109,5 +104,23 @@ namespace AutoTrace.Generator
         public static string TraceLeaveMethod(this IMethodSymbol symbol) => $@"AutoTrace.TraceLeaveMethod($""Leave: {symbol.GetMethodDeclarationWithNamespace()}""";
         public static string TraceParameter(this IParameterSymbol parameter) => $@"AutoTrace.TraceParameter($""{{nameof({parameter.Name})}} = {{{parameter.Name}}}"");";
         public static string TraceReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : $@"MDEVTrace.TraceParameter($""ReturValue = {{result}}"");";
+
+        private static void AddParameterName(StringBuilder sb, IParameterSymbol parameter)
+        {
+            sb.Append(parameter.Type.Name);
+            sb.Append(" ");
+        }
+
+        private static void AddParameterValue(StringBuilder sb, IParameterSymbol parameter)
+        {
+            sb.Append(parameter.Name);
+            sb.Append(", ");
+        }
+
+        private static void DeleteTrailingCommaAndWhitespace(StringBuilder sb)
+        {
+            if (sb.Length > 1)
+                sb.Remove(sb.Length - 2, 2); // delete last , 
+        }
     }
 }

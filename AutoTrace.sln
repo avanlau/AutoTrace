@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTrace.Generator", "AutoTrace.Generator\AutoTrace.Generator.csproj", "{C116B74D-BD28-41BD-A4D5-14D177888368}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTrace.UnitTests", "AutoTrace.UnitTests\AutoTrace.UnitTests.csproj", "{DF48F53B-9FC1-4C81-8AB4-7EA34EBF4852}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C116B74D-BD28-41BD-A4D5-14D177888368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C116B74D-BD28-41BD-A4D5-14D177888368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C116B74D-BD28-41BD-A4D5-14D177888368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C116B74D-BD28-41BD-A4D5-14D177888368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF48F53B-9FC1-4C81-8AB4-7EA34EBF4852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF48F53B-9FC1-4C81-8AB4-7EA34EBF4852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF48F53B-9FC1-4C81-8AB4-7EA34EBF4852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF48F53B-9FC1-4C81-8AB4-7EA34EBF4852}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

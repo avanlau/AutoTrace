@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="AutoTrace.Generator.TraceSourceGenerator">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraceSourceGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoTrace.Generator.TraceSymbolVisitorBase">
+    <Position X="5.5" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAABAgAIAAAAAAAAAAACAAgAABAAAAAABA=</HashCode>
+      <FileName>TraceSymbolVisitorBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoTrace.Generator.NamedTypeSymbolCodeGenerator">
+    <Position X="5" Y="4" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhBAAAAQAAgAAAAAAAAAAAAAEAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>NamedTypeSymbolCodeGenerator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_methodSourceGenerator" />
+      <Field Name="_propertySourceGenerator" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutoTrace.Generator.MethodSourceGenerator">
+    <Position X="3" Y="8.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>MethodSourceGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoTrace.Generator.PropertySourceGenerator">
+    <Position X="8.25" Y="8.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>PropertySourceGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AutoTrace.Generator.IMethodSourceGenerator">
+    <Position X="3" Y="7" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>MethodSourceGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutoTrace.Generator.IPropertySourceGenerator">
+    <Position X="8.25" Y="7" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>PropertySourceGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

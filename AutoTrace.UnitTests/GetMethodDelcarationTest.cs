@@ -18,11 +18,11 @@ namespace AutoTrace.UnitTests
     }
 
     [Collection("TextCode")]
-    public class GetMethodDelcarationTestsxUnit
+    public class GetMethodDelcarationTest
     {
         TextCodeFixture fixture;
 
-        public GetMethodDelcarationTestsxUnit(TextCodeFixture fixture)
+        public GetMethodDelcarationTest(TextCodeFixture fixture)
         {
             this.fixture = fixture;
         }

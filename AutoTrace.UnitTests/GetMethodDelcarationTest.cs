@@ -18,13 +18,10 @@ namespace AutoTrace.UnitTests
     }
 
     [Collection("TextCode")]
-    public class GetMethodDelcarationTest
+    public class GetMethodDelcarationTest : TestBase
     {
-        TextCodeFixture fixture;
-
-        public GetMethodDelcarationTest(TextCodeFixture fixture)
+        public GetMethodDelcarationTest(TextCodeFixture fixture) : base(fixture)
         {
-            this.fixture = fixture;
         }
 
         [Theory]
@@ -69,24 +66,24 @@ namespace AutoTrace.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        private IMethodSymbol GetMetodSymbol(TypeKind typeKind, string methodName)
-        {
-            INamedTypeSymbol symbol;
-            switch (typeKind)
-            {
-                case (TypeKind.Class):
-                    symbol = fixture.TestClassSymbol;
-                    break;
-                case (TypeKind.Struct):
-                    symbol = fixture.TestStructSymbol;
-                    break;
-                default:
-                    throw new NullReferenceException();
-            }
+        //private IMethodSymbol GetMetodSymbol(TypeKind typeKind, string methodName)
+        //{
+        //    INamedTypeSymbol symbol;
+        //    switch (typeKind)
+        //    {
+        //        case (TypeKind.Class):
+        //            symbol = fixture.TestClassSymbol;
+        //            break;
+        //        case (TypeKind.Struct):
+        //            symbol = fixture.TestStructSymbol;
+        //            break;
+        //        default:
+        //            throw new NullReferenceException();
+        //    }
 
-            var methodSymbol = (IMethodSymbol)symbol.GetMembers().Where(m => m.Name.Equals(methodName)).First();
+        //    var methodSymbol = (IMethodSymbol)symbol.GetMembers().Where(m => m.Name.Equals(methodName)).First();
 
-            return methodSymbol;
-        }
+        //    return methodSymbol;
+        //}
     }
 }

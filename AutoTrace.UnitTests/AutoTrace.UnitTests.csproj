@@ -86,7 +86,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="GetMethodDelcarationTest.cs" />
+    <Compile Include="GetMethodReturnTypeAndValueTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="TestCode.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>

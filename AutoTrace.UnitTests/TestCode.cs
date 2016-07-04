@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestNamespace
 {
-    public class TestClass
+    public partial class TestClass
     {
         public TestClass()
         {

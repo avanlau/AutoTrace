@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace AutoTrace.UnitTests
 {
+    public enum TypeKind
+    {
+        Class,
+        Struct
+    }
+
     public class TestBase
     {
         public TextCodeFixture fixture { get; private set; }
@@ -16,19 +22,36 @@ namespace AutoTrace.UnitTests
             this.fixture = fixture;
         }
 
-        public IMethodSymbol GetMetodSymbol(TypeKind typeKind, string methodName)
+        public IMethodSymbol GetMetodSymbol(TypeKind typeKind, string methodName, bool result = false)
         {
             INamedTypeSymbol symbol;
-            switch (typeKind)
+            if (result)
             {
-                case (TypeKind.Class):
-                    symbol = fixture.TestClassSymbol;
-                    break;
-                case (TypeKind.Struct):
-                    symbol = fixture.TestStructSymbol;
-                    break;
-                default:
-                    throw new NullReferenceException();
+                switch (typeKind)
+                {
+                    case (TypeKind.Class):
+                        symbol = fixture.TestClassSymbolResult;
+                        break;
+                    case (TypeKind.Struct):
+                        symbol = fixture.TestStructSymbolResult;
+                        break;
+                    default:
+                        throw new NullReferenceException();
+                }
+            }
+            else
+            {
+                switch (typeKind)
+                {
+                    case (TypeKind.Class):
+                        symbol = fixture.TestClassSymbol;
+                        break;
+                    case (TypeKind.Struct):
+                        symbol = fixture.TestStructSymbol;
+                        break;
+                    default:
+                        throw new NullReferenceException();
+                }
             }
 
             var methodSymbol = (IMethodSymbol)symbol.GetMembers().Where(m => m.Name.Equals(methodName)).First();

@@ -85,13 +85,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="GetMethodDelcarationTest.cs" />
-    <Compile Include="GetMethodReturnTypeAndValueTests.cs" />
+    <Compile Include="MethodExtensionTests.cs" />
+    <Compile Include="MethodSourceGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
+    <Compile Include="TestCodeResult.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="TestCode.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Content Include="TestResults\Result1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Include="TextCodeFixture.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -103,7 +103,7 @@ namespace AutoTrace.Generator
         public static string TraceEnterMethod(this IMethodSymbol symbol) => $@"AutoTrace.TraceEnterMethod($""Enter: {symbol.GetMethodDeclarationWithNamespace()}""";
         public static string TraceLeaveMethod(this IMethodSymbol symbol) => $@"AutoTrace.TraceLeaveMethod($""Leave: {symbol.GetMethodDeclarationWithNamespace()}""";
         public static string TraceParameter(this IParameterSymbol parameter) => $@"AutoTrace.TraceParameter($""{{nameof({parameter.Name})}} = {{{parameter.Name}}}"");";
-        public static string TraceReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : $@"MDEVTrace.TraceParameter($""ReturValue = {{result}}"");";
+        public static string TraceReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : $@"AutoTrace.TraceParameter($""ReturValue = {{result}}"");";
 
         private static void AddParameterName(StringBuilder sb, IParameterSymbol parameter)
         {

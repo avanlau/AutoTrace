@@ -26,8 +26,8 @@ namespace AutoTrace.UnitTests
             var treeResult = CSharpSyntaxTree.ParseText(SourceResult);
 
             var compilationResult = CSharpCompilation.Create("TestCodeResultCompilation", syntaxTrees: new[] { treeResult }, references: new[] { mscorlib });
-            TestClassSymbolResult = compilationResult.GetTypeByMetadataName("TestNamespace.Result.TestClass");
-            TestStructSymbolResult = compilationResult.GetTypeByMetadataName("TestNamespace.Result.TestStruct");
+            TestClassSymbolResult = compilationResult.GetTypeByMetadataName("TestNamespace.TestClass");
+            TestStructSymbolResult = compilationResult.GetTypeByMetadataName("TestNamespace.TestStruct");
         }
 
         public void Dispose()

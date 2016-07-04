@@ -11,8 +11,6 @@ using Xunit;
 
 namespace AutoTrace.UnitTests
 {
-   
-
     [Collection("TextCode")]
     public class MethodExtensionTests : TestBase
     {

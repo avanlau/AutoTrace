@@ -12,27 +12,6 @@ namespace AutoTrace.Generator
     {
         public void Generate(IMethodSymbol symbol, StringBuilder sb)
         {
-            //            string r = $@"
-            //        replace {symbol.DeclaredAccessibility.ToString().ToLower()} {symbol.ReturnType.Name} {symbol.Name}({symbol.GetMethodParameters()})
-            //        {{
-            //            MDEVTrace.TraceEnter($""Enter: {symbol.GetMethodDelcaration()}"");
-            //{GetParameterTrace(method)}
-
-            //            try
-            //            {{
-            //                var result = original({GetParametersCall(method)});
-            //                MDEVTrace.TraceParameter($""ReturValue = {{result}}"");
-            //                MDEVTrace.TraceLeave($""Leave: {symbol.GetMethodDelcaration()}"");
-            //                return result;
-            //            }}
-            //            catch (Exception e)
-            //            {{
-            //                MDEVTrace.TraceError($""Exception: {{e.GetType().Name}}{{Environment.NewLine}}{{e.Message}}"");
-            //                throw;
-            //            }}
-            //        }}
-            //";
-
             sb.AppendLine($"replace {symbol.GetMethodDeclaration()}");
             sb.AppendLine(OpenCurlyBraces());
             sb.AppendLine("try");

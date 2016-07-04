@@ -44,7 +44,7 @@ namespace TestNamespace
         }
     }
 
-    public struct TestStruct
+    public partial struct TestStruct
     {
         public TestStruct(int a, string b)
         {

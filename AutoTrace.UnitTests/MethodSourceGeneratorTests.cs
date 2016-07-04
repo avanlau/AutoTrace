@@ -19,19 +19,26 @@ namespace AutoTrace.UnitTests
         {
         }
 
-        [Fact]
-        public void The_Generate_Method_SOULD_Return_SourceCode_With_Trace_Functionality()
+        [Theory]
+        [InlineData(TypeKind.Class, "MethodWithoutReturnValueAndParameters")]
+        [InlineData(TypeKind.Class, "MethodWithReturnValueWithoutParameters")]
+        [InlineData(TypeKind.Class, "MethodWithoutReturnValueWithParameters")]
+        [InlineData(TypeKind.Class, "MethodWithReturnValueAndParameters")]
+        [InlineData(TypeKind.Struct, "MethodWithoutReturnValueAndParameters")]
+        [InlineData(TypeKind.Struct, "MethodWithReturnValueWithoutParameters")]
+        [InlineData(TypeKind.Struct, "MethodWithoutReturnValueWithParameters")]
+        [InlineData(TypeKind.Struct, "MethodWithReturnValueAndParameters")]
+        public void The_Generate_Method_SOULD_Return_SourceCode_With_Trace_Functionality(TypeKind typeKind, string methodName)
         {
             // Arrange
-            string expected = Normalize(GetSource(GetMetodSymbol(TypeKind.Class, "MethodWithReturnValueAndParameters", true), "MethodWithReturnValueAndParameters")); // File.ReadAllText("TestResults\\Result1.txt");
+            string expected = Normalize(GetSource(GetMetodSymbol(typeKind, methodName, true), methodName));
             MethodSourceGenerator generator = new MethodSourceGenerator();
             StringBuilder sb = new StringBuilder();
-            IMethodSymbol method = GetMetodSymbol(TypeKind.Class, "MethodWithReturnValueAndParameters");
+            IMethodSymbol method = GetMetodSymbol(typeKind, methodName);
 
             // Act
             generator.Generate(method, sb);
             string code = sb.ToString();
-
             string actual = Normalize(code);
 
             // Assert
@@ -43,9 +50,12 @@ namespace AutoTrace.UnitTests
             var syntaxTree = symbol.DeclaringSyntaxReferences.First().SyntaxTree;
             var root = syntaxTree.GetRoot();
             var method = root.DescendantNodes()
-                             .OfType<MethodDeclarationSyntax>()
-                             .Where(md => md.Identifier.ValueText.Equals(methodName))
-                             .FirstOrDefault();
+                .OfType<TypeDeclarationSyntax>()
+                .Where(ns => ns.Identifier.ValueText.Equals(symbol.ContainingType.Name)).First().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Where(md => md.Identifier.ValueText.Equals(methodName))
+                .FirstOrDefault();
+
             return method.ToString();
         }
 

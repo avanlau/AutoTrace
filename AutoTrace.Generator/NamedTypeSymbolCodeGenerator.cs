@@ -73,7 +73,10 @@ namespace {symbol.ContainingNamespace.ToString()}
             var methods = symbol.GetMembers().Where(m => m.Kind == SymbolKind.Method);
             foreach (IMethodSymbol method in methods)
             {
-                _methodSourceGenerator.Generate(method, sb);
+                if (HasTraceAttribute(method) || HasTraceAttribute(method.ContainingType) || HasTraceAttribute(method.ContainingNamespace) || HasTraceAttribute(method.ContainingAssembly) || HasTraceAttribute(method.ContainingModule))
+                {
+                    _methodSourceGenerator.Generate(method, sb);
+                }
             }
 
             return sb.ToString();

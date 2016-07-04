@@ -6,10 +6,9 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoTrace.Generator
 {
+    [SourceGenerator("C#")]
     public class TraceSourceGenerator : SourceGenerator
     {
-        
-
         public override void Execute(SourceGeneratorContext context)
         {
             //System.Diagnostics.Debugger.Launch();

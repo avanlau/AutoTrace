@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Microsoft.CodeAnalysis;
 
 namespace AutoTrace.Generator
@@ -12,7 +13,19 @@ namespace AutoTrace.Generator
     {
         public void Generate(IMethodSymbol symbol, StringBuilder sb)
         {
-            sb.AppendLine($"replace {symbol.GetMethodDeclaration()}");
+            switch (symbol.MethodKind)
+            {
+                case MethodKind.Constructor:
+                    sb.AppendLine($"replace {symbol.GetConstructorDeclaration()}");
+                    break;
+
+                case MethodKind.Ordinary:
+                    sb.AppendLine($"replace {symbol.GetMethodDeclaration()}");
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
             sb.AppendLine(OpenCurlyBraces());
             sb.AppendLine("try");
             sb.AppendLine(OpenCurlyBraces());
@@ -70,7 +83,7 @@ namespace AutoTrace.Generator
 
             return sb.ToString();
         }
-
+        public static string GetConstructorDeclaration(this IMethodSymbol method) => $"{method.DeclaredAccessibility.ToString().ToLower()} {method.ContainingType.Name}({method.GetMethodParameters()})";
         public static string GetMethodDeclaration(this IMethodSymbol method) => $"{method.DeclaredAccessibility.ToString().ToLower()} {method.GetMethodReturnType()} {method.Name}({method.GetMethodParameters()})";
         public static string GetMethodDeclarationWithNamespace(this IMethodSymbol method) => $"{method.DeclaredAccessibility.ToString().ToLower()} {method.GetMethodReturnType()} {method.ContainingNamespace.ToString()}.{method.ContainingType.Name}.{method.Name}({method.GetMethodParameters()})";
         public static string GetMethodReturnType(this IMethodSymbol symbol) => symbol.ReturnsVoid ? "void" : symbol.ReturnType.Name;

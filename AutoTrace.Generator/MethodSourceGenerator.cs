@@ -13,19 +13,11 @@ namespace AutoTrace.Generator
     {
         public void Generate(IMethodSymbol symbol, StringBuilder sb)
         {
-            switch (symbol.MethodKind)
-            {
-                case MethodKind.Constructor:
-                    sb.AppendLine($"replace {symbol.GetConstructorDeclaration()}");
-                    break;
+            if (symbol.MethodKind != MethodKind.Ordinary)
+                return;
 
-                case MethodKind.Ordinary:
-                    sb.AppendLine($"replace {symbol.GetMethodDeclaration()}");
-                    break;
-
-                default:
-                    throw new NotImplementedException();
-            }
+            sb.Append($"replace ");
+            sb.AppendLine(symbol.GetMethodDeclaration());
             sb.AppendLine(OpenCurlyBraces());
             sb.AppendLine("try");
             sb.AppendLine(OpenCurlyBraces());

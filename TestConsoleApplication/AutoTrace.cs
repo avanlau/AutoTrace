@@ -20,6 +20,7 @@ namespace TestConsoleApplication
         public static void TraceEnterMethod(string message)
         {
             TraceInformation(message);
+            TraceInformation("{");
             IncreseIndent();
         }
 
@@ -27,14 +28,16 @@ namespace TestConsoleApplication
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"{indent}{message}");
+            Console.WriteLine($"{System.DateTime.Now.ToLongTimeString()} : {indent}{message}");
             Console.ForegroundColor = color;
         }
 
         public static void TraceLeaveMethod(string message)
         {
             DecreseIndent();
+            TraceInformation("}");
             TraceInformation(message);
+            TraceInformation("");
         }
 
         private static void IncreseIndent()
@@ -51,7 +54,7 @@ namespace TestConsoleApplication
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{indent}{message}");
+            Console.WriteLine($"{System.DateTime.Now.ToLongTimeString()} : {indent}{message}");
             Console.ForegroundColor = color;
         }
 

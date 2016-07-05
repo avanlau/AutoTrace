@@ -66,7 +66,10 @@ namespace {symbol.ContainingNamespace.ToString()}
             var properties = symbol.GetMembers().Where(m => m.Kind == SymbolKind.Property);
             foreach (IPropertySymbol property in properties)
             {
-                _propertySourceGenerator.Generate(property, sb);
+                if (HasTraceAttribute(property) || HasTraceAttribute(property.ContainingType) || HasTraceAttribute(property.ContainingNamespace) || HasTraceAttribute(property.ContainingAssembly) || HasTraceAttribute(property.ContainingModule))
+                {
+                    _propertySourceGenerator.Generate(property, sb);
+                }
             }
 
             // Methods

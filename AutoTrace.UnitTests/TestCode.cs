@@ -19,6 +19,7 @@ namespace TestNamespace
         }
 
         public int AutoProperty { get; set; }
+        public int AutoPrivateSetProperty { get; private set; }
 
         private string myProperty;
         public string MyProperty

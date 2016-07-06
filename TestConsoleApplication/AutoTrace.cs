@@ -28,7 +28,7 @@ namespace TestConsoleApplication
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"{System.DateTime.Now.ToLongTimeString()} : {indent}{message}");
+            Console.WriteLine($"{GetLogTimeStamp()} : {indent}{message}");
             Console.ForegroundColor = color;
         }
 
@@ -54,7 +54,7 @@ namespace TestConsoleApplication
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{System.DateTime.Now.ToLongTimeString()} : {indent}{message}");
+            Console.WriteLine($"{GetLogTimeStamp()} : {indent}{message}");
             Console.ForegroundColor = color;
         }
 
@@ -64,6 +64,11 @@ namespace TestConsoleApplication
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"{indent}{message}");
             Console.ForegroundColor = color;
+        }
+
+        private static string GetLogTimeStamp()
+        {
+            return $"{System.DateTime.Now.ToShortDateString()} {System.DateTime.Now.ToLongTimeString()}";
         }
     }
 }

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace TestConsoleApplication.BussinesLogic
 {
-    [AutoTrace]
+    //[AutoTrace]
+    [AutoTrace(typeof(ConsoleTracer))]
     public partial class Calculator
     {
-        //[AutoTrace]
+        [AutoTrace(typeof(ConsoleTracer2))]
         public int Arg1 { get; set; }
 
         private int arg2;
@@ -24,6 +25,7 @@ namespace TestConsoleApplication.BussinesLogic
         //[AutoTrace]
         public int DivideSavedValuesAndMultiplyBy(int multiplier)
         {
+            ConsoleTracer.TraceInformation("Log something");
             return (Arg1 / Arg2) * multiplier;
         }
 

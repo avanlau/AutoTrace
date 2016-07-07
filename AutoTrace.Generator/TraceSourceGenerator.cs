@@ -9,6 +9,12 @@ namespace AutoTrace.Generator
     [SourceGenerator("C#")]
     public class TraceSourceGenerator : SourceGenerator
     {
+        NamedTypeSymbolCodeGenerator visitor;
+        public TraceSourceGenerator()
+        {
+
+        }
+
         public override void Execute(SourceGeneratorContext context)
         {
             //System.Diagnostics.Debugger.Launch();

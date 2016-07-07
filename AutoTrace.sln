@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTrace.UnitTests", "Auto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApplication", "TestConsoleApplication\TestConsoleApplication.csproj", "{D2FE0800-82C0-4DD2-B398-039ED231241A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTrace", "AutoTrace\AutoTrace.csproj", "{3C0A5A91-EE81-42C5-B57D-6EB97C259B04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D2FE0800-82C0-4DD2-B398-039ED231241A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2FE0800-82C0-4DD2-B398-039ED231241A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2FE0800-82C0-4DD2-B398-039ED231241A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0A5A91-EE81-42C5-B57D-6EB97C259B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0A5A91-EE81-42C5-B57D-6EB97C259B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0A5A91-EE81-42C5-B57D-6EB97C259B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0A5A91-EE81-42C5-B57D-6EB97C259B04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

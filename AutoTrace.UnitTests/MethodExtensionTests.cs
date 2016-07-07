@@ -91,7 +91,7 @@ namespace AutoTrace.UnitTests
             IParameterSymbol parameterSymbol = methodSymbol.Parameters.Where(p => p.Name.Equals("a")).First();
 
             // Act
-            var actual = parameterSymbol.TraceParameter();
+            var actual = parameterSymbol.TraceParameter(methodSymbol);
 
             // Assert
             Assert.Equal(expected, actual);

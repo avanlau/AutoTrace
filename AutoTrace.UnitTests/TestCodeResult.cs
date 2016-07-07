@@ -9,10 +9,11 @@ namespace TestNamespace
 {
     public partial class TestClass
     {
-        replace public TestClass(int a, string b)
-        {
-            Console.WriteLine("Changed Constructor");
-        }
+        // NOT SUPPORTED
+        //replace public TestClass(int a, string b)
+        //{
+        //    Console.WriteLine("Changed Constructor");
+        //}
         replace public void MethodWithoutReturnValueAndParameters()
         {
             try

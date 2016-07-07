@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using System.Linq;
 
 namespace AutoTrace.Generator
 {
@@ -24,7 +25,7 @@ namespace AutoTrace.Generator
             sb.AppendLine(symbol.TraceEnterMethod());
             foreach (IParameterSymbol parameter in symbol.Parameters)
             {
-                sb.AppendLine(parameter.TraceParameter());
+                sb.AppendLine(parameter.TraceParameter(symbol));
             }
             sb.AppendLine(symbol.CallOriginalMethod());
             sb.AppendLine(symbol.TraceReturnValue());
@@ -33,14 +34,13 @@ namespace AutoTrace.Generator
             sb.AppendLine(CloseCurlyBraces());
             sb.AppendLine("catch (Exception e)");
             sb.AppendLine(OpenCurlyBraces());
-            sb.AppendLine(TraceException());
+            sb.AppendLine(symbol.TraceException());
             sb.AppendLine("throw;");
             sb.AppendLine(CloseCurlyBraces());
             sb.AppendLine(CloseCurlyBraces());
             sb.AppendLine();
         }
 
-        private string TraceException() => $@"AutoTrace.TraceException($""Exception: {{e.GetType().Name}}{{Environment.NewLine}}{{e.Message}}"");";
         private string OpenCurlyBraces() => $@"{{";
         private string CloseCurlyBraces() => $@"}}";
     }
@@ -75,17 +75,29 @@ namespace AutoTrace.Generator
 
             return sb.ToString();
         }
+        public static string TraceException(this IMethodSymbol symbol) => $@"{symbol.GetTraceType()}.TraceException($""Exception: {{e.GetType().Name}}{{Environment.NewLine}}{{e.Message}}"");";
         public static string GetConstructorDeclaration(this IMethodSymbol method) => $"{method.DeclaredAccessibility.ToString().ToLower()} {method.ContainingType.Name}({method.GetMethodParameters()})";
         public static string GetMethodDeclaration(this IMethodSymbol method) => $"{method.DeclaredAccessibility.ToString().ToLower()} {method.GetMethodReturnType()} {method.Name}({method.GetMethodParameters()})";
         public static string GetMethodDeclarationWithNamespace(this IMethodSymbol method) => $"{method.DeclaredAccessibility.ToString().ToLower()} {method.GetMethodReturnType()} {method.ContainingNamespace.ToString()}.{method.ContainingType.Name}.{method.Name}({method.GetMethodParameters()})";
         public static string GetMethodReturnType(this IMethodSymbol symbol) => symbol.ReturnsVoid ? "void" : symbol.ReturnType.Name;
         public static string GetMethodReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : "var result = ";
         public static string CallOriginalMethod(this IMethodSymbol symbol) => $@"{symbol.GetMethodReturnValue()}original({symbol.GetMethodArguments()});";
-        public static string TraceEnterMethod(this IMethodSymbol symbol) => $@"AutoTrace.TraceEnterMethod($""Enter: {symbol.GetMethodDeclarationWithNamespace()}"");";
-        public static string TraceLeaveMethod(this IMethodSymbol symbol) => $@"AutoTrace.TraceLeaveMethod($""Leave: {symbol.GetMethodDeclarationWithNamespace()}"");";
-        public static string TraceParameter(this IParameterSymbol parameter) => $@"AutoTrace.TraceParameter($""{{nameof({parameter.Name})}} = {{{parameter.Name}}}"");";
-        public static string TraceReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : $@"AutoTrace.TraceParameter($""ReturValue = {{result}}"");";
+        public static string TraceEnterMethod(this IMethodSymbol symbol) => $@"{symbol.GetTraceType()}.TraceEnterMethod($""Enter: {symbol.GetMethodDeclarationWithNamespace()}"");";
+        public static string TraceLeaveMethod(this IMethodSymbol symbol) => $@"{symbol.GetTraceType()}.TraceLeaveMethod($""Leave: {symbol.GetMethodDeclarationWithNamespace()}"");";
+        public static string TraceParameter(this IParameterSymbol parameter, IMethodSymbol method) => $@"{method.GetTraceType()}.TraceParameter($""{{nameof({parameter.Name})}} = {{{parameter.Name}}}"");";
+        public static string TraceReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : $@"{symbol.GetTraceType()}.TraceParameter($""ReturValue = {{result}}"");";
         public static string ReturnValue(this IMethodSymbol symbol) => symbol.ReturnsVoid ? string.Empty : "return result;";
+
+        public static string GetTraceType(this IMethodSymbol symbol)
+        {
+            if (symbol.GetAttributes().FirstOrDefault() != null)
+                return ((symbol.GetAttributes()[0].ConstructorArguments).FirstOrDefault()).Value.ToString();
+
+            if (symbol.ContainingType.GetAttributes().FirstOrDefault() != null)
+                return ((symbol.ContainingType.GetAttributes()[0].ConstructorArguments).FirstOrDefault()).Value.ToString();
+
+            throw new ArgumentException("Can't find trace type.");
+        }
 
         private static void AddParameterName(StringBuilder sb, IParameterSymbol parameter)
         {
